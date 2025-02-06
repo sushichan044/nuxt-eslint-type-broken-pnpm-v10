@@ -4,6 +4,12 @@
 
 When using pnpm v10 with nuxt/eslint module, the module type is broken and we cannot get completion when editing `eslint.config.js`.
 
+This is because pnpm v10 no longer hoists packages with ESLint in the name unless they are explicitly installed. ref: [issue: pnpm/pnpm#8378](https://github.com/pnpm/pnpm/issues/8378)
+
+Because of this, `@nuxt/eslint-config` and `eslint-flat-config-utils` are no longer hoisted, TypeScript cannot find the type definition, and the export of `.nuxt/eslint.config.mjs` is treated as any.
+
+## Reproduction
+
 You can check the problem at [eslint.config.mjs](./eslint.config.mjs) file.
 
 ```js
